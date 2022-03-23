@@ -29,9 +29,14 @@ func main() {
 		jwtManager.JwtAuth(),
 	)
 
+	nWithoutAuth := negroni.New(
+		negroni.NewLogger(),
+	)
+
 	//handlers
 	handlers.MakeArticlesHandler(r, n, aService)
 	handlers.MakeUsersHandlers(r, n, uService)
+	handlers.MakeHomeHandler(r, nWithoutAuth)
 
 	http.Handle("/", r)
 

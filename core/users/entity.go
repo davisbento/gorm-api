@@ -1,6 +1,8 @@
 package users
 
 import (
+	"time"
+
 	"github.com/gofrs/uuid"
 	"gorm.io/gorm"
 )
@@ -9,11 +11,12 @@ type User struct {
 	gorm.Model
 
 	Id           uuid.UUID `gorm:"primaryKey;type:uuid;"`
-	Name         string    `gorm:"size:255"`
-	Email        string    `gorm:"size:255"`
-	Password     string    `gorm:"size:255"`
+	Name         string    `gorm:"size:100"`
+	Email        string    `gorm:"size:100"`
+	Password     string    `gorm:"size:100"`
 	Activate     bool      `gorm:"default:true"`
-	RefreshToken string    `gorm:"size:255"`
+	RefreshToken string    `gorm:"size:100"`
+	CreatedAt    time.Time `gorm:"default:NOW()"`
 }
 
 type UserCreateModel struct {

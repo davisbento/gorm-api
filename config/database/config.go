@@ -10,10 +10,10 @@ import (
 )
 
 const (
-	host     = "localhost"
+	host     = "database"
 	port     = 5432
-	user     = "postgres"
-	password = "root"
+	user     = "davisbento"
+	password = "davisbento_pass"
 	dbname   = "articles"
 )
 
@@ -21,6 +21,7 @@ func Connect() *gorm.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 	db, err := gorm.Open(postgres.Open(psqlInfo), &gorm.Config{})
+
 	if err != nil {
 		panic(err)
 	}

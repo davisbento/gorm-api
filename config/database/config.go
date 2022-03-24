@@ -1,6 +1,7 @@
 package database
 
 import (
+	"github.com/davisbento/gorm-api/config/env"
 	"github.com/davisbento/gorm-api/core/articles"
 	"github.com/davisbento/gorm-api/core/users"
 	"gorm.io/driver/postgres"
@@ -10,16 +11,12 @@ import (
 )
 
 const (
-	host     = "database"
-	port     = 5432
-	user     = "davisbento"
-	password = "davisbento_pass"
-	dbname   = "articles"
+	port = 5432
 )
 
 func Connect() *gorm.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+		env.GetEnv("DB_NAME"), port, env.GetEnv("POSTGRES_USER"), env.GetEnv("POSTGRES_PASSWORD"), env.GetEnv("POSTGRES_DB"))
 	db, err := gorm.Open(postgres.Open(psqlInfo), &gorm.Config{})
 
 	if err != nil {
